@@ -21,23 +21,29 @@ bool triangleCalculations(double sides[], double *perimeter, double *square, boo
 	return true;
 }
 
-void enterTriangleParameters() {
-	// Ввод параметров треугольника
-	double sides[3];
-	for (int i = 0; i < 3; i++) {
-		cout << "Введите " << i + 1 << "ю сторону треугольника: ";
-		while (!(cin >> sides[i])) {
-			cin.clear();
-			cin.ignore(10000, '\n');
+int main() {
+	while (true) {
+		// Ввод параметров треугольника
+		double sides[3];
+		for (int i = 0; i < 3; i++) {
+			cout << "Введите " << i + 1 << "-ю сторону треугольника: ";
+			while (!(cin >> sides[i])) {
+				cin.clear();
+				cin.ignore(10000, '\n');
+			}
 		}
+		cout << endl;
+		// Рассчет и вывод параметров треугольника
+		double perimeter, square;
+		bool isosceles, result = triangleCalculations(sides, &perimeter, &square, &isosceles);
+		if (result) {
+			cout << "Стороны:  " << sides[0] << " " << sides[1] << " " << sides[2] << endl;
+			cout << "Периметр: " << perimeter << endl;
+			cout << "Площадь:  " << square << endl;
+			cout << ((isosceles) ? "Равнобедренный" : "Не равнобедренный") << " треугольник" << endl;
+		} else
+			cout << "Треугольник с такими сторонами не может существовать!" << endl;
+		cout << endl;
 	}
-	// Рассчет и вывод параметров треугольника
-	double perimeter, square;
-	bool isosceles, result = triangleCalculations(sides, &perimeter, &square, &isosceles);
-	if (result) {
-		cout << "Периметр:  " << perimeter << endl;
-		cout << "Площадь:   " << square << endl;
-		cout << ((isosceles) ? "Равнобедренный" : "Не равнобедренный") << " треугольник" << endl;
-	} else
-		cout << "Треугольник с такими сторонами не может существовать!" << endl;
+	return 0;
 }
