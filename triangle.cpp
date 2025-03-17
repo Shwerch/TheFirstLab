@@ -20,6 +20,7 @@ bool triangleCalculations(double sides[], double *perimeter, double *square, boo
 			*isosceles = true;
 	return true;
 }
+// Комментарий)
 
 int main() {
 	while (true) {
