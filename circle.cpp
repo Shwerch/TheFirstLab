@@ -11,10 +11,17 @@ struct CircleParameters {
 // Функция для получения параметров окружности
 CircleParameters enterCircleParameters(int option) {
     CircleParameters params;
-    cout << "Введите радиус (в сантиметрах): ";
-    cin >> params.radius;
 
-    // Если выбран сектора, нужно также запросить угол
+    // Запрашиваем радиус
+    do {
+        cout << "Введите радиус (в сантиметрах): ";
+        cin >> params.radius;
+        if (params.radius < 0) {
+            cout << "Введите положительное число.\n";
+        }
+    } while (params.radius < 0);
+
+    // Если выбран сектор, нужно также запросить угол
     if (option == 3) {
         do {
             cout << "Введите угол в градусах (0-360): ";
@@ -45,7 +52,7 @@ float circle_sector_area(int R, float angle) { // функция для расч
 int main() {
     short int choice = 0; // переменная для выбора действия
 
-    while(true) { // бесконечный цикл меню
+    while (true) { // бесконечный цикл меню
         cout << "\nВыберите действие с окружностью:\n";
         cout << "1: Вычислить длину окружности\n";
         cout << "2: Вычислить площадь круга\n";
@@ -56,19 +63,19 @@ int main() {
 
         CircleParameters params;
 
-        if(choice == 1 || choice == 2 || choice == 3) {
+        if (choice == 1 || choice == 2 || choice == 3) {
             // Получаем параметры с помощью новой функции
             params = enterCircleParameters(choice);
         }
 
-        if(choice == 1) {
+        if (choice == 1) {
             cout << "Длина окружности равна: " << circle_length(params.radius) << endl;
-        } else if(choice == 2) {
+        } else if (choice == 2) {
             cout << "Площадь круга равна: " << circle_area(params.radius) << endl;
-        } else if(choice == 3) {
+        } else if (choice == 3) {
             cout << "Площадь кругового сектора равна: " 
                  << circle_sector_area(params.radius, params.angle) << endl;
-        } else if(choice == 4) {
+        } else if (choice == 4) {
             return 0;
         } else {
             // Если пользователь ввел не существующий номер
